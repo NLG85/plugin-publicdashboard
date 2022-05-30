@@ -1,0 +1,22 @@
+<#include "managedashboard_tabs.html" />
+<@tabs2 tab="dashboard" />
+<@box>
+	<@boxHeader title='#i18n{publicdashboard.create_dashboard.title}' />
+	<@boxBody>
+    <@tform name='create_dashboard' action='jsp/admin/plugins/publicdashboard/ManageDashboards.jsp' >
+
+        <@messages errors=errors />
+        <@input type="hidden" id="id" name="id"/>
+        <@input type="hidden" value="${token}" name="token" />
+
+		<@formGroup labelFor='id_bean' labelKey='#i18n{publicdashboard.modify_dashboard.labelIdBean}' mandatory=true>
+			<@select name='id_bean' items=listtypedashboard id='id_bean' default_value='${dashboard.idBean!\'\'}' />
+		</@formGroup>
+		<@formGroup labelFor='zone' labelKey='#i18n{publicdashboard.modify_dashboard.labelZone}' mandatory=true>
+			<@input type='text' id='zone' name='zone'  value='${dashboard.zone!\'\'}' tabIndex='1' />
+		</@formGroup>
+				
+		<@actionButtons button1Name="action_createDashboard" button2Name="view_manageDashboard"/>
+    </@tform>
+	</@boxBody>
+</@box>

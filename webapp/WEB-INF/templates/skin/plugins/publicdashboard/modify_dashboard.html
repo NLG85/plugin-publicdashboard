@@ -1,0 +1,30 @@
+<#include "dashboard_tabs.html" />
+<@tabs2 tab="dashboard" />
+
+<@box>
+	<@boxHeader title='#i18n{componentdashboard.modify_dashboard.title}' />
+	<@boxBody>
+		<@tform class='form-horizontal' action='jsp/site/Portal.jsp' >
+				<@messages errors=errors />
+				<@input type="hidden" id="id" name="id" value="${dashboard.id}"/>
+				<@input type="hidden" value="${token}" name="token" />
+				<@input type="hidden" name="page" value="dashboard" /> 
+
+				<@formGroup labelFor='id_bean' labelKey='#i18n{componentdashboard.modify_dashboard.labelIdBean}' mandatory=true>
+					<@input type="text" id="id_bean" name="id_bean" value="${dashboard.idBean!''}"  tabIndex="1" />
+				</@formGroup>
+				<@formGroup labelFor='zone' labelKey='#i18n{componentdashboard.modify_dashboard.labelZone}' mandatory=true>
+					<@input type="text" id="zone" name="zone" value="${dashboard.zone!''}"  tabIndex="2" />
+				</@formGroup>
+				<@formGroup labelFor='order' labelKey='#i18n{componentdashboard.modify_dashboard.labelOrder}' mandatory=true>
+					<@input type="text" id="position" name="position" value="${dashboard.position!''}"  tabIndex="3" />
+				</@formGroup>
+
+				<@formGroup>
+         			<@button name='action_modifyDashboard' type='submit' tabIndex='3' title='#i18n{portal.util.labelModify}' buttonIcon='plus' />
+          			<@button name='view_manageDashboards' type='submit' title='#i18n{portal.util.labelCancel}' buttonIcon='close' color='btn-secondary' cancel=true />
+				</@formGroup>
+		</@tform>
+	</@boxBody>
+</@box>
+

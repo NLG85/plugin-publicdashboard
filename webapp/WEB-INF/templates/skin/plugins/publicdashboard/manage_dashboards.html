@@ -1,0 +1,54 @@
+<#include "dashboard_tabs.html" />
+<@tabs2 tab="dashboard" />
+
+<@row>
+	<@columns>
+		<@messages infos=infos />
+		<@tform action='jsp/site/Portal.jsp?page=dashboard'>
+			<@button type='submit' name='view_createDashboard' class='pull-right' buttonIcon='plus' title='#i18n{componentdashboard.manage_dashboards.buttonAdd}' />
+		</@tform>
+
+    	<h4>#i18n{componentdashboard.manage_dashboards.title}</h4>
+        
+    	<@table>
+			<tr>
+					<th>#i18n{componentdashboard.manage_dashboards.columnIdBean}</th>
+					<th>#i18n{componentdashboard.manage_dashboards.columnZone}</th>
+					<th>#i18n{componentdashboard.manage_dashboards.columnOrder}</th>
+					<th>#i18n{portal.util.labelActions}</th>
+        	</tr>
+				<#list dashboard_list as dashboard >
+        	<tr>
+            <td>
+					${dashboard.idBean}
+            </td>    
+            <td>
+					${dashboard.zone}
+            </td>    
+            <td>
+					${dashboard.position}
+            </td>    
+			<td>
+				<@aButton href='jsp/site/Portal.jsp?page=dashboard&view=modifyDashboard&id=${dashboard.id}' title='#i18n{portal.util.labelModify}' hideTitle=['all'] buttonIcon='pencil-square-o' />
+						
+				<@aButton href='jsp/site/Portal.jsp?page=dashboard&action=confirmRemoveDashboard&id=${dashboard.id}' title='#i18n{portal.util.labelDelete}' buttonIcon='trash' hideTitle=['all'] color='btn-danger' />
+				
+				<#if dashboard_index!=0>
+                   <a href="jsp/admin/plugins/dashboard/ManagePublicDashboards.jsp?action=moveUpDashboard&id=${dashboard.id}"
+                       class="btn btn-primary btn-sm" title="#i18n{dashboard.manage_dashboards.labelUp}" >
+                         <i class="fa fa-arrow-up">&nbsp;</i>
+                   </a>
+                </#if>
+                <#if dashboard_has_next>
+                  <a href="jsp/admin/plugins/dashboard/ManagePublicDashboards.jsp?action=moveDownDashboard&id=${dashboard.id}"
+                       class="btn btn-primary btn-sm" title="#i18n{dashboard.manage_dashboards.labelDown}" >
+                         <i class="fa fa-arrow-down">&nbsp;</i>
+                   </a>
+                </#if>
+			</td>
+        </tr>
+        </#list>
+    	</@table>
+	</@columns>
+</@row>
+
