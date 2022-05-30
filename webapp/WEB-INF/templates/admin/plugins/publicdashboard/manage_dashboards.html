@@ -1,0 +1,55 @@
+<#include "managedashboard_tabs.html" />
+<@tabs2 tab="dashboard" />
+
+<@box>
+	<@boxHeader title='#i18n{publicdashboard.manage_dashboard.title}' boxTools=true>
+		<@tform class='form-inline pull-right' name='manage_dashboard' action='jsp/admin/plugins/publicdashboard/ManageDashboards.jsp'>
+			<@button type='submit' name='view_createDashboard' buttonIcon='plus' title='#i18n{publicdashboard.manage_dashboards.buttonAdd}' />
+		</@tform>
+	</@boxHeader>
+	<@boxBody>    
+    <@messages infos=infos />
+    <@paginationAdmin paginator=paginator combo=1 />
+    <div class="clearfix"></div>
+    <@table>
+        <tr>
+            <th>#i18n{publicdashboard.manage_dashboards.columnIdBean}</th>
+            <th>#i18n{publicdashboard.manage_dashboards.columnZone}</th>
+            <th>#i18n{portal.util.labelActions}</th>
+        </tr>
+        <@tableHeadBodySeparator />
+        <#list dashboard_list as dashboard >
+        <tr>
+            <td>
+				${listtypedashboard[dashboard.idBean]} 
+			</td>
+            <td>
+				${dashboard.zone}
+			</td>
+        	<td>
+				<@aButton href='jsp/admin/plugins/publicdashboard/ManageDashboards.jsp?view=modifyDashboard&id=${dashboard.id}' title='#i18n{portal.util.labelModify}' hideTitle=['all'] buttonIcon='pencil' />
+						
+				<@aButton href='jsp/admin/plugins/publicdashboard/ManageDashboards.jsp?action=confirmRemoveDashboard&id=${dashboard.id}' title='#i18n{portal.util.labelDelete}' buttonIcon='trash' hideTitle=['all'] color='btn-danger'  />
+				
+				<#if dashboard_index!=0>
+                   <a href="jsp/admin/plugins/publicdashboard/ManageDashboards.jsp?action=moveUpDashboard&id=${dashboard.id}"
+                       class="btn btn-primary btn-sm" title="#i18n{dashboard.manage_dashboards.labelUp}" >
+                         <i class="fa fa-arrow-up">&nbsp;</i>
+                   </a>
+                </#if>
+                <#if dashboard_has_next>
+                  <a href="jsp/admin/plugins/publicdashboard/ManageDashboards.jsp?action=moveDownDashboard&id=${dashboard.id}"
+                       class="btn btn-primary btn-sm" title="#i18n{dashboard.manage_dashboards.labelDown}" >
+                         <i class="fa fa-arrow-down">&nbsp;</i>
+                   </a>
+                </#if>
+				
+	        </td>
+        </tr>
+        </#list>
+    </@table>
+
+    <@paginationAdmin paginator=paginator />
+
+  </@boxBody>
+</@box>

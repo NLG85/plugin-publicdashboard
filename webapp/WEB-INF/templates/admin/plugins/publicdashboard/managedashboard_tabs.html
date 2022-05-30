@@ -1,0 +1,10 @@
+<#macro tabs2 tab >
+<@tabs>
+	<@tabList>
+			<li <#if tab="dashboard">class="active"</#if>>
+				<@aButton href="jsp/admin/plugins/publicdashboard/ManageDashboards.jsp">#i18n{publicdashboard.manage_dashboards.pageTitle}</@aButton>
+			</li>
+	</@tabList>
+</@tabs>
+
+</#macro>
